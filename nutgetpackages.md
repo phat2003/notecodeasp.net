@@ -1,0 +1,1 @@
+_entityframeworkcore_ giúp các class có thể kế thừa `DbContext` để sử dụng
