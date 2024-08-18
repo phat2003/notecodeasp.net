@@ -1,0 +1,1 @@
+_asp-controller="Home" asp-action="Privacy"_ : tạo link(liên kết) chỉ định tới controller và action trong file html để mở trang html khác theo url:/controller/action

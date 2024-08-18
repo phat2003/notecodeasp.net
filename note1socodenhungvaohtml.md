@@ -1,0 +1,3 @@
+_asp-controller="Home" asp-action="Privacy"_ : tạo link(liên kết) chỉ định tới controller và action trong file html để mở trang html khác theo url:/controller/action (đưa lệnh này vào thẻ cần tạo link là được)
+`Home` : Home ở đây là HomeController, khi đặt tên file trong folder là HomeController thì file có chữ Controller sẽ được hiểu mặc định file đó là 1 Controller. Cho nên khi truyền Controller chỉ cần truyền vào tên được đặt phía trước Controller là được.
+`Privacy` : là một action bên trong file Controller với cấu trúc code như này _public IActionResult `Privacy`()_
