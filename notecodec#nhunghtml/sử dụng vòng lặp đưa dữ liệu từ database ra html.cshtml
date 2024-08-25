@@ -1,0 +1,11 @@
+@foreach (var item in Model)
+{
+        <div class="box-character">
+            <img class="img-characters" src="https://www.w3schools.com/w3images/mountains.jpg" alt="image-character" />
+            <div class="container-characters">
+                <p class="name-characters"><b class="namechar">@item.name</b></p>
+                <span>@item.role</span>
+                <p>@item.team</p>
+            </div>
+        </div>
+}
