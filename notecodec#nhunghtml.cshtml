@@ -1,0 +1,34 @@
+=======lặp khối giới hạn 3 phần tử bên trong==========
+mô tả : khi bên trong khối <div class="row-characters"> có đủ 3 <div class="box-character"> và database có thêm dữ liệu tương ứng với phần tử <div class="box-character"> thứ 4 được tạo ra thì sẽ tự động tạo thêm một khối <div class="row-characters"> giới hạn chứa là 3 <div class="box-character"> và cứ lặp như vậy một cách liên tục.
+
+@{
+    int count = 0;
+}
+@foreach (var item in Model)
+{
+    // Kiểm tra xem đã đủ 3 box-character trong row hiện tại chưa
+    if (count % 3 == 0)
+    {
+        @:<div class="row-characters">
+    } 
+
+    
+        <div class="box-character">
+            <img class="img-characters" src="https://www.w3schools.com/w3images/mountains.jpg" alt="image-character" />
+            <div class="container-characters">
+                <p class="name-characters"><b class="namechar">@item.name</b></p>
+                <span>@item.role</span>
+                <p>@item.team</p>
+            </div>
+        </div>
+        
+    // Tăng biến đếm
+    count++;
+
+    // Nếu đã đủ 3 box-character, đóng thẻ row-characters
+    if (count % 3 == 0)
+    {
+        @:</div>
+    }
+}
+==========================================================
