@@ -2,17 +2,17 @@
 mô tả : khi bên trong khối <div class="row-characters"> có đủ 3 <div class="box-character"> và database có thêm dữ liệu tương ứng với phần tử <div class="box-character"> thứ 4 được tạo ra thì sẽ tự động tạo thêm một khối <div class="row-characters"> giới hạn chứa là 3 <div class="box-character"> và cứ lặp như vậy một cách liên tục.
 
 @{
-    int count = 0;
+    int count = 0;//biến count này được sử dụng để đếm số lần lặp
 }
 @foreach (var item in Model)
 {
     // Kiểm tra xem đã đủ 3 box-character trong row hiện tại chưa
-    if (count % 3 == 0)
+    if (count % 3 == 0)//khi chưa lặp thì count = 0 % 3 = 0 => tạo thẻ này và lặp <div class="box-character">
     {
         @:<div class="row-characters">
     } 
 
-    
+    //chỗ sẽ được lặp
         <div class="box-character">
             <img class="img-characters" src="https://www.w3schools.com/w3images/mountains.jpg" alt="image-character" />
             <div class="container-characters">
@@ -21,14 +21,15 @@ mô tả : khi bên trong khối <div class="row-characters"> có đủ 3 <div c
                 <p>@item.team</p>
             </div>
         </div>
+    //chỗ sẽ được lặp
         
     // Tăng biến đếm
-    count++;
+    count++; //lặp <div class="box-character"> xong thì tăng biến đếm count thêm 1
 
     // Nếu đã đủ 3 box-character, đóng thẻ row-characters
-    if (count % 3 == 0)
+    if (count % 3 == 0)//khi biến lặp tới lần thứ 3 và biến count tăng đến số 3 và 3 % 3 == 0 thì sẽ thực hiện khối code bên trong if
     {
-        @:</div>
+        @:</div> <!--tạo thẻ div-->
     }
 }
 ==========================================================
