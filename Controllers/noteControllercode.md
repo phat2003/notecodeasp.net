@@ -1,4 +1,4 @@
-=====method action trả về views======
+=====tạo method action trả về views======
 _public IActionResult `Index()`_
 {
     _return `View();`_
@@ -29,3 +29,25 @@ _public IActionResult_ `Create`(`Models` `tên biến bất kỳ tự đặt`)
 `_db`.SaveChanges(); : lưu thay đổi sau khi đã đưa param lên database.
 return RedirectToAction("`index`"); : hành động trả về action khác (ví dụ ở đây đang là hành động trả về action index)
 =====================================================
+=======tạo valid kiểm tra data nhập vào database có đúng với ràng buộc không? cho dự án=============
+if (ModelState.IsValid)
+{
+    
+}
+
+ở html phải thêm lệnh này thì mới có báo lỗi valid: 
+<span asp-validation-for="Name" class="text-danger"></span>
+
+============================================================
+=====tuỳ chỉnh kiểm tra valid==========
+if (obj.Name == obj.DisplayOrder.ToString())
+{
+    ModelState.AddModelError("DisplayOrder", "The Name must not same displayorder");
+}
+ModelState.AddModelError("Tên của cột trong table", "này là thông báo lỗi tuỳ chỉnh(muốn ghi gì thì ghi)"); : thêm lỗi tuỳ chỉnh vào cột bất kỳ trong model.
+
+ở html thêm lệnh này:
+<div asp-validation-summary=All></div>
+================================================
+========
+
