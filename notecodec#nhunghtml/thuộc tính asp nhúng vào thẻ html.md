@@ -17,4 +17,10 @@ _asp-validation-for_="`Cột trong database`" : chỉ định một thẻ trong 
 _asp-validation-summary_=`All` : hiển thị toàn bộ thông báo lỗi valid khi có lỗi nhập không đúng ràng buộc
 
 ====================================================
-
+=======validation ở phía client==============
+@section Scripts 
+{
+    <partial name ="_ValidationScriptsPartial" />
+}
+`_ValidationScriptsPartial` là một file nằm trong views/shared được tạo sẵn từ asp.net khi tạo project.
+lệnh này sẽ giúp khi nhập dữ liệu không đúng với ràng buộc sẽ không báo lỗi về vscode mà sẽ chỉ báo lỗi ở web
