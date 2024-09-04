@@ -4,7 +4,18 @@ _public IActionResult `Index()`_
     _return `View();`_
 }
 nguyên câu lệnh trên hiểu ngắn gọn là `url:home/index` `home` là `controller` còn `index` là `action`
-===============================
+============================================================================
+======tạo 1 biến đọc để đọc dữ liệu đang được lưu trữ trong database=======
+private readonly `ApplicationDbContext` _db;//biến này chỉ được đọc(không được ghi hay làm gì khác).
+public CategoryController(`ApplicationDbContext` `db`)
+{
+    _db = db;
+}
+`ApplicationDbContext` : là tên của file dùng để chuyển đổi Models thành bảng database thông qua add-migration và update database lên sql server.
+`db` : là tên bất kỳ được đặt làm param cho `ApplicationDbContext`
+truyền vào param db khai báo bằng `ApplicationDbContext` giống biến _readonly_ và gọi `_db` = `db`; ở trong đối tượng `CategoryController` để có thể sử dụng đối tượng `CategoryController` để đọc dữ liệu trong database ở bất cứ đâu thông qua biến `_db` khi được gọi tới.
+đọc dữ liệu đã được thêm vào database như là id,sản phẩm,số lượng,....
+===========================================================================
 ======method action đưa database lên html=========
 _public IActionResult `Index`()_
 {
