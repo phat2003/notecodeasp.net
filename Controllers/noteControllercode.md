@@ -26,7 +26,7 @@ _public IActionResult `Index`()_
 // ở đây trả về View truyền vào biến `IEnumerable` được đặt tên là objCategoryList
 //khi muốn hiển thị data của Models lên trang html nào thì phải thêm @model IEnumerable<`Model`> vào file html cần hiển thị giao diện database
 ========================================
-====method post create dùng để post data được tạo khi nhập và nhấn action create=========
+====method action Create post dùng để post data được tạo khi nhập và nhấn action create=========
 //post
 [HttpPost]
 [ValidateAntiForgeryToken]//lệnh này dùng để chống giả mạo về method này
@@ -36,15 +36,24 @@ _public IActionResult_ `Create`(`Models` `tên biến bất kỳ tự đặt`)
     `_db`.SaveChanges();
     return RedirectToAction("`index`");
 }
+
 `_db`.`Data`.Add(`tên biến bất kỳ tự đặt`); : thêm param của method vào database.
 `_db`.SaveChanges(); : lưu thay đổi sau khi đã đưa param lên database.
 return RedirectToAction("`index`"); : hành động trả về action khác (ví dụ ở đây đang là hành động trả về action index)
 =====================================================
 =======tạo valid kiểm tra data nhập vào database có đúng với ràng buộc không? cho dự án=============
-if (ModelState.IsValid)
+_public IActionResult_ `Create`(`Category` `obj`)
 {
-    
+    _if (ModelState.IsValid)_
+    {
+        `_db`.`Categories`._Add_(`obj`);
+        `_db`._SaveChanges_();
+        _return RedirectToAction_("`index`");
+    }
+    _return View_(`obj`);
 }
+
+_if (ModelState.IsValid)_ {} :đây chính là lệnh tạo ra valid khi nhập sai ràng buộc.
 
 ở html phải thêm lệnh này thì mới có báo lỗi valid: 
 <span asp-validation-for="Name" class="text-danger"></span>
@@ -59,6 +68,61 @@ ModelState.AddModelError("Tên của cột trong table", "này là thông báo l
 
 ở html thêm lệnh này:
 <div asp-validation-summary=All></div>
-================================================
-========
 
+================================================
+========action Edit===========
+_public IActionResult_ `Edit`(`int?` `id`)
+{
+    if (`id`==`null` || `id`==`0`)
+    {
+        _return NotFound();_
+    }
+    _var_ `categoryfromDb` = `_db.Categories`._Find(`id`)_;
+    //var categoryfromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //var categoryfromDbsingle = _db.Categories.SingleOrDefault(u => u.Id == id);
+    _if_ (`categoryfromDb` == `null`)
+    {
+        _return NotFound();_
+    }
+    _return View(`categoryfromDb`);_
+}
+
+truyền vào 1 param `id` kiểu int vào action edit để dùng nó lấy dữ liệu từ database ra để edit thông qua cột `Id` trong database
+điều kiện id = null hoặc = 0 thì trả về notFound();
+tạo 1 biến var và truyền biến id vào Find() để tìm kiếm dựa trên giá trị của id
+-
+_FirstOrDefault_: trả về phần tử đầu tiên của một tập hợp dữ liệu thoả mãn điều kiện được cung cấp, hoặc giá trị mặc định của kiểu dữ liệu đó nếu không có phần tử nào phù hợp. Đối với kiểu tham chiếu như lớp hoặc chuỗi (_string_), giá trị mặc định là `null`. Đối với kiểu giá trị (value types) như _int_, giá trị mặc định là `0`.
+truyền vào hàm ẩn danh `u=>u.Id==id` : `u` sẽ bị ép trỏ tới cột `Id` trong database để nhận data từ cột `Id`, nghĩa là `u` bây giờ chính là giá trị của cột `Id` mà `u` == `id` tương đương `Id` == `id`.
+_FirstOrDefault_ :thường được dùng để xử lý những dữ liệu không tồn tại trong hệ thống
+-
+`categoryfromDb` biến này được tạo ra để lấy data từ Database ra ngoài
+nếu giá trị là `id` mà `null`, cũng tức là không tìm thấy giá trị nào trong database có `id` = `Id` trong database(cũng tức là nói `categoryfromDb` bị `null`) thì trả về _notFound();_
+
+_return View(`categoryfromDb`);_ : nếu không có cái nào đáp ứng 2 điều kiện trên thì trả về View với giá trị `categoryfromDb` được truyền vào và hiển thị data lấy được từ database thông qua `categoryfromDb`.
+-
+
+//post
+[HttpPost]
+[ValidateAntiForgeryToken]//lệnh này dùng để chống giả mạo về method này
+_public IActionResult_ `Edit`(`Category` `obj`)
+{
+    if (`obj`.`Name` == `obj`.`DisplayOrder`.ToString())
+    {
+        ModelState.AddModelError("`name`", "The Name must not same displayorder");
+    }
+    if (ModelState.IsValid)
+    {
+        _db.Categories._Update_(obj);
+        _db.SaveChanges();
+        return RedirectToAction("`index`");
+    }
+    return View(`obj`);
+}
+_db.Categories._Update_(obj); : lưu ý chỗ này phải để là Update để cập nhật các thay đổi khi edit dữ liệu lên database.
+
+ở html nên thêm vào asp-action="Edit" ở thẻ chứa method="post" để trỏ đúng tới action Edit
+<form method="post" asp-action="Edit">
+</form>
+
+=============================================================
+=========
