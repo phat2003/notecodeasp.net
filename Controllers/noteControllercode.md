@@ -136,4 +136,36 @@ _db.Categories._Update_(obj); : lưu ý chỗ này phải để là Update để
 </form>
 
 =============================================================
-=========
+=========method delete========
+public IActionResult Delete(int? id)
+{
+    if (id == null || id == 0)
+    {
+        return NotFound();
+    }
+    var categoryfromDb = _db.Categories.Find(id);
+    //var categoryfromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //var categoryfromDbsingle = _db.Categories.SingleOrDefault(u => u.Id == id);
+    if (categoryfromDb == null)
+    {
+        return NotFound();
+    }
+    return View(categoryfromDb);
+}
+
+//post
+[HttpPost]
+[ValidateAntiForgeryToken]//lệnh này dùng để chống giả mạo về method này
+public IActionResult DeletePost(int? id)
+{
+    var obj = _db.Categories.Find(id);
+    //var categoryfromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //var categoryfromDbsingle = _db.Categories.SingleOrDefault(u => u.Id == id);
+    if (ModelState.IsValid)
+    {
+        _db.Categories.Remove(obj);
+        _db.SaveChanges();
+        return RedirectToAction("index");
+    }
+    return View(obj);
+}
