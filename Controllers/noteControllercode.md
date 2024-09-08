@@ -65,6 +65,7 @@ if (obj.Name == obj.DisplayOrder.ToString())
     ModelState.AddModelError("DisplayOrder", "The Name must not same displayorder");
 }
 ModelState.AddModelError("Tên của cột trong table", "này là thông báo lỗi tuỳ chỉnh(muốn ghi gì thì ghi)"); : thêm lỗi tuỳ chỉnh vào cột bất kỳ trong model.
+ở đây đang đặt điều kiện là nếu name = DisplayOrder cả 2 có giá trị trùng nhau thì thực thi lệnh thêm lỗi bên trong if.
 
 ở html thêm lệnh này:
 <div asp-validation-summary=All></div>
