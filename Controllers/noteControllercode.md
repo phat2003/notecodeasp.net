@@ -34,12 +34,12 @@ _public IActionResult_ `Create`(`Models` `tên biến bất kỳ tự đặt`)
 {
     `_db`.`Data`.Add(`tên biến bất kỳ tự đặt`);
     `_db`.SaveChanges();
-    return RedirectToAction("`index`");
+    _return RedirectToAction_("`index`");
 }
 
-`_db`.`Data`.Add(`tên biến bất kỳ tự đặt`); : thêm param của method vào database.
-`_db`.SaveChanges(); : lưu thay đổi sau khi đã đưa param lên database.
-return RedirectToAction("`index`"); : hành động trả về action khác (ví dụ ở đây đang là hành động trả về action index)
+`_db`.`Data`._Add_(`tên biến bất kỳ tự đặt`); : thêm param của method vào database.
+`_db`._SaveChanges_(); : lưu thay đổi sau khi đã đưa param lên database.
+_return RedirectToAction_("`index`"); : hành động trả về action khác (ví dụ ở đây đang là hành động trả về action index)
 =====================================================
 =======tạo valid kiểm tra data nhập vào database có đúng với ràng buộc không? cho dự án=============
 _public IActionResult_ `Create`(`Category` `obj`)
@@ -60,11 +60,21 @@ _if (ModelState.IsValid)_ {} :đây chính là lệnh tạo ra valid khi nhập 
 
 ============================================================
 =====tuỳ chỉnh kiểm tra valid==========
-if (obj.Name == obj.DisplayOrder.ToString())
+public IActionResult Edit(Category obj)
 {
-    ModelState.AddModelError("DisplayOrder", "The Name must not same displayorder");
+    if (`obj`.`Name` == `obj`.`DisplayOrder`._ToString_())
+    {
+        _ModelState.AddModelError_("`name`", "The Name must not same displayorder");
+    }
+    if (ModelState.IsValid)
+    {
+        _db.Categories.Update(obj);
+        _db.SaveChanges();
+        return RedirectToAction("index");
+    }
+    return View(obj);
 }
-ModelState.AddModelError("Tên của cột trong table", "này là thông báo lỗi tuỳ chỉnh(muốn ghi gì thì ghi)"); : thêm lỗi tuỳ chỉnh vào cột bất kỳ trong model.
+_ModelState.AddModelError_("Tên của cột trong table", "này là thông báo lỗi tuỳ chỉnh(muốn ghi gì thì ghi)"); : thêm lỗi tuỳ chỉnh vào cột bất kỳ trong model.
 ở đây đang đặt điều kiện là nếu name = DisplayOrder cả 2 có giá trị trùng nhau thì thực thi lệnh thêm lỗi bên trong if.
 
 ở html thêm lệnh này:
