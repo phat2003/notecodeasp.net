@@ -169,3 +169,48 @@ public IActionResult DeletePost(int? id)
     }
     return View(obj);
 }
+=======================================================
+=====action Delete======
+public IActionResult Delete(int? id)
+{
+    if (id == null || id == 0)
+    {
+        return NotFound();
+    }
+    var categoryfromDb = _db.Categories.Find(id);
+    //var categoryfromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //var categoryfromDbsingle = _db.Categories.SingleOrDefault(u => u.Id == id);
+    if (categoryfromDb == null)
+    {
+        return NotFound();
+    }
+    return View(categoryfromDb);
+}
+Giải thích code:
+Method Get này của Delete y chang Edit
+
+
+//post
+[HttpPost]
+[ValidateAntiForgeryToken]//lệnh này dùng để chống giả mạo về method này
+public IActionResult `DeletePost`(_int?_ `id`)
+{
+    var `obj` = _db.Categories.Find(`id`);
+    //var categoryfromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+    //var categoryfromDbsingle = _db.Categories.SingleOrDefault(u => u.Id == id);
+    if (`obj` == `null`)
+    {
+        return NotFound();
+    }
+    else
+    {
+        _db.Categories._Remove_(obj);
+        _db.SaveChanges();
+        return RedirectToAction("index");
+    }
+    return View(obj);
+}
+Giải thích code:
+method Post của `Delete` được lấy `id` được truyền vào làm param
+biến obj được khởi tạo để tìm `id` trong database Categories.
+dùng if-else làm điều kiện để lọc ra obj bị null. Nếu id bị null nghĩa là biến tìm id là obj cũng bị null thì trả về NotFound, còn nếu id tìm được có giá trị thì sẽ xoá obj chứa id đó.

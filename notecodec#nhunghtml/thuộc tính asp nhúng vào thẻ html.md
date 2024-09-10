@@ -37,4 +37,36 @@ lệnh này sẽ giúp khi nhập dữ liệu không đúng với ràng buộc s
 </form>
 
 ===================================================
-=========
+=========action Delete==================
+thêm _disabled_ vào thẻ html nào mà chúng ta không muốn thẻ đó hoạt động.
+thêm <input asp-for="Id" hidden/> để View nhận dữ liệu của trường Id và ẩn nó đi.
+@model Category //khá giống lệnh using namespace nhưng ở đây là add model để sử dụng model đó ở file này
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden/>
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>Delete category</h2>
+            <hr/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" disabled class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DisplayOrder"></label>
+            <input asp-for="DisplayOrder" disabled class="form-control"/>
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Delete</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-primary">Back To List</a>
+    </div>
+
+</form>
+@section Scripts 
+{
+    <partial name ="_ValidationScriptsPartial" />
+}
+
+=======================================
