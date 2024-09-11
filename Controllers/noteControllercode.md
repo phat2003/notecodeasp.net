@@ -219,4 +219,5 @@ dùng if-else làm điều kiện để lọc ra obj bị null. Nếu id bị nu
 
 trong Views:
 thêm _disabled_ vào thẻ html nào mà chúng ta không muốn thẻ đó hoạt động.
-thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận dữ liệu của trường Id và ẩn nó đi.
+thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận dữ liệu của trường Id và ẩn nó để không hiện ra field nhập Id do id đã được nhận khi nhấn nút Delete của vòng lặp tương ứng với data của Id đó rồi.
+nếu bình thưởng thẻ input mà không có hidden 
