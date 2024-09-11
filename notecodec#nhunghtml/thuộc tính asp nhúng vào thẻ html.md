@@ -39,7 +39,9 @@ lệnh này sẽ giúp khi nhập dữ liệu không đúng với ràng buộc s
 ===================================================
 =========action Delete==================
 thêm _disabled_ vào thẻ html nào mà chúng ta không muốn thẻ đó hoạt động.
-thêm <input asp-for="Id" hidden/> để View nhận dữ liệu của trường Id và ẩn nó đi.
+thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận dữ liệu của trường Id và ẩn nó đi.
+
+
 @model Category //khá giống lệnh using namespace nhưng ở đây là add model để sử dụng model đó ở file này
 
 <form method="post" asp-action="DeletePost">

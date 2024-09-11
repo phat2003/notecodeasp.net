@@ -171,6 +171,8 @@ public IActionResult DeletePost(int? id)
 }
 =======================================================
 =====action Delete======
+trong Controller:
+
 public IActionResult Delete(int? id)
 {
     if (id == null || id == 0)
@@ -214,3 +216,7 @@ Giải thích code:
 method Post của `Delete` được lấy `id` được truyền vào làm param
 biến obj được khởi tạo để tìm `id` trong database Categories.
 dùng if-else làm điều kiện để lọc ra obj bị null. Nếu id bị null nghĩa là biến tìm id là obj cũng bị null thì trả về NotFound, còn nếu id tìm được có giá trị thì sẽ xoá obj chứa id đó.
+
+trong Views:
+thêm _disabled_ vào thẻ html nào mà chúng ta không muốn thẻ đó hoạt động.
+thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận dữ liệu của trường Id và ẩn nó đi.
