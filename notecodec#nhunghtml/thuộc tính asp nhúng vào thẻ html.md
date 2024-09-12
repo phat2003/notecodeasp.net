@@ -72,3 +72,9 @@ thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận d
 }
 
 =======================================
+========temp data=======
+
+@if (TempData["Sucess"] != null)
+{
+    <h2>@TempData["Sucess"]</h2>
+}

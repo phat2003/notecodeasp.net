@@ -220,4 +220,20 @@ dùng if-else làm điều kiện để lọc ra obj bị null. Nếu id bị nu
 trong Views:
 thêm _disabled_ vào thẻ html nào mà chúng ta không muốn thẻ đó hoạt động.
 thêm <input asp-for="Id" hidden/> ở sau thẻ mở <form> để View nhận dữ liệu của trường Id và ẩn nó để không hiện ra field nhập Id do id đã được nhận khi nhấn nút Delete của vòng lặp tương ứng với data của Id đó rồi.
-nếu bình thưởng thẻ input mà không có hidden 
+nếu bình thưởng thẻ input mà không có hidden.
+=====================================================
+========temp Data===========
+TempData[] là một tính năng được sử dụng để lưu trữ dữ liệu tạm thời giữa các yêu cầu HTTP
+Dữ liệu trong TempData chỉ tồn tại trong thời gian ngắn và sẽ bị xóa sau khi được truy xuất (hoặc hết phiên làm việc).
+_TempData_["Sucess"] = "`Category Delete sucessfully`";
+ở đây chúng ta sẽ dùng nó để hiển thị ra giá trị được truyền vào trong _TempData_ lên View khi được gọi tới action chứa nó với điều kiện là _TempData_ phải được truyền vào vị trí mà chúng ta cần hiển thị _TempData_ lên View.
+
+Ở View:
+_TempData_ được truyền vào với điều kiện khác null là hiển thị ra thẻ tiêu đề h2 nhưng vốn dĩ _TempData_ được truyền vào giá `Category Delete sucessfully` nên không thể nào có chuyện nó nul được
+cho nên `Category Delete sucessfully` sẽ được hiển thị khi được chuyển hướng từ action chứa _TempData_ đến View được truyền vào _TempData_.
+và khi làm mới lại trang html thì _TempData_ sẽ biến mất.
+@if (TempData["Sucess"] != null)
+{
+    <h2>@TempData["Sucess"]</h2>
+}
+===========================================================
