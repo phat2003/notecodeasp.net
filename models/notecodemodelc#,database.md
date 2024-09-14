@@ -10,3 +10,5 @@ _[Display(Name = "`Display Order`")]_ Tùy chỉnh hiển thị và giá trị b
 [_Range_(`1`, `100`, 
         _ErrorMessage_ = "Value for {0} must be between {1} and {2}.")]
 _Range_ : giới hạn độ dài ký tự(chữ,...) của trường được nhập vào (ở đây đang là 1-100)
+
+[_StringLength_(`50`, _MinimumLength_ = `5`, _ErrorMessage_ = "Name must be between 5 and 50 characters.")]
