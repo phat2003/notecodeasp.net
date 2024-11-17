@@ -1,0 +1,23 @@
+/* Đổi màu cho loại thông báo thành công */
+.toast-success {
+    background-color: #28a745 !important; /* Màu nền */
+    color: #fff !important; /* Màu chữ */
+}
+
+/* Đổi màu cho loại thông báo lỗi */
+.toast-error {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+/* Đổi màu cho loại thông báo thông tin */
+.toast-info {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+}
+
+/* Đổi màu cho loại cảnh báo */
+.toast-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
